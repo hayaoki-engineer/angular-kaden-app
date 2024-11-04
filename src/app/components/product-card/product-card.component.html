@@ -17,6 +17,10 @@
               <i [class]="product.rating > 3 ? 'fa fa-star' : 'fa fa-star-o'"></i>
               <i [class]="product.rating > 4 ? 'fa fa-star' : 'fa fa-star-o'"></i>
           </div>
+          <!-- Display 'Out of Stock' button -->
+          <button *ngIf="product.availableQty === 0" type="button" class="btn btn-secondary">Out of Stock</button>
+          <!-- Display 'Add to Cart' button -->
+          <button *ngIf="product.availableQty > 0" type="button" class="btn btn-success">Add to Cart</button>
       </div>
   </div>
 </div>
