@@ -190,8 +190,12 @@ export class HomeComponent {
     },
   ];
 
+  public filteredProducts: Product[] = [];
+  public selectedCategory: string = '';
+
   constructor() {
     this.productList = this.markNewProducts(this.productList);
+    this.filteredProducts = this.productList;
   }
 
   public trackByIndex(index: number, item: any): number {
@@ -209,4 +213,18 @@ export class HomeComponent {
       return product;
     })
   }
+
+  public filterCategory(category: string): void {
+    // 選択されたカテゴリが現在の選択カテゴリと同じ場合
+    if (this.selectedCategory === category) {
+      // 選択カテゴリをリセットし、フィルタリングされた商品リストをリセット
+      this.selectedCategory = '';
+      this.filteredProducts = this.productList;
+    } else {
+      // 選択カテゴリを更新し、指定されたカテゴリに属する商品のみをフィルタリング
+      this.selectedCategory = category;
+      this.filteredProducts = this.productList.filter(product => product.category === category);
+    }
+  }
+
 }
