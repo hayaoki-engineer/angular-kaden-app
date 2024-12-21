@@ -190,7 +190,23 @@ export class HomeComponent {
     },
   ];
 
+  constructor() {
+    this.productList = this.markNewProducts(this.productList);
+  }
+
   public trackByIndex(index: number, item: any): number {
     return index;
+  }
+
+  private markNewProducts(productList: Product[]): Product[] {
+    const referenceDate = new Date('2024-04-01');
+    const threeMonthAgo = new Date(referenceDate);
+    threeMonthAgo.setMonth(threeMonthAgo.getMonth() - 3);
+
+    return productList.map(product => {
+      const releaseDate = new Date(product.releaseDate);
+      product.isNew = releaseDate > threeMonthAgo;
+      return product;
+    })
   }
 }
