@@ -202,6 +202,7 @@ export class HomeComponent {
     return index;
   }
 
+  // 新しい商品をマークするメソッド
   private markNewProducts(productList: Product[]): Product[] {
     const referenceDate = new Date('2024-04-01');
     const threeMonthAgo = new Date(referenceDate);
@@ -224,6 +225,22 @@ export class HomeComponent {
       // 選択カテゴリを更新し、指定されたカテゴリに属する商品のみをフィルタリング
       this.selectedCategory = category;
       this.filteredProducts = this.productList.filter(product => product.category === category);
+    }
+  }
+
+  // 商品をソートするメソッド
+  public sortProducts(event: Event): void {
+    const target = event.target as HTMLSelectElement | null;
+    if (target) {
+      const sortOption = target.value;
+      switch (sortOption) {
+        case 'priceAsc':
+          this.filteredProducts.sort((a, b) => a.price - b.price);
+          break;
+        default:
+          this.filteredProducts.sort((a, b) => a.productId - b.productId);
+          break;
+      }
     }
   }
 
