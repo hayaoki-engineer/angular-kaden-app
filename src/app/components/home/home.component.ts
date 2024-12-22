@@ -230,9 +230,11 @@ export class HomeComponent {
 
   // 商品をソートするメソッド
   public sortProducts(event: Event): void {
+    // ソートオプションを取得
     const target = event.target as HTMLSelectElement | null;
     if (target) {
       const sortOption = target.value;
+      // ソートオプションに応じて商品をソート
       switch (sortOption) {
         case 'priceAsc':
           this.filteredProducts.sort((a, b) => a.price - b.price);
